@@ -43,12 +43,12 @@ async function setValue<T = any>(path: string, data: T) {
     return admin.database().ref(path).set(data).then()
 }
 
-export function typedAdminDB<T>(path: string[] = []): TypedPathWrapper<T> {
+export function typedAdminDB<T>(path: string[] = []): TypedAdminDB<T> {
     const toRoute = (s: string) => {
         return s.split(",").join("/")
     }
 
-    return <TypedPathWrapper<T>>new Proxy({}, {
+    return <TypedAdminDB<T>>new Proxy({}, {
         get(target: T, name: TypedPathKey) {
             const route = toRoute(path.toString())
             if (name === '$path') {
@@ -93,10 +93,10 @@ type TypedPathNode<T> = {
 
 // type TypedPathFunction<T> = (...args: any[]) => T;
 
-type TypedPathWrapper<T> = (
+export type TypedAdminDB<T> = (
     T extends Array<infer Z>
-    ? { [index: number]: TypedPathWrapper<Z>; }
+    ? { [index: number]: TypedAdminDB<Z>; }
     : T extends TypedPathFunction<infer RET>
-    ? { (): TypedPathWrapper<RET>; } & { [P in keyof RET]: TypedPathWrapper<RET[P]>; }
-    : { [P in keyof T]: TypedPathWrapper<T[P]>; }
+    ? { (): TypedAdminDB<RET>; } & { [P in keyof RET]: TypedAdminDB<RET[P]>; }
+    : { [P in keyof T]: TypedAdminDB<T[P]>; }
 ) & TypedPathNode<T>;

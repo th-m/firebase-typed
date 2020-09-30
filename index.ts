@@ -1,2 +1,2 @@
-export { typedAdminDB } from './src/fire-functions';
-export { typedRealTimeDB } from './src/realtime-db';
+export { typedAdminDB, TypedAdminDB } from './src/fire-functions';
+export { typedRealTimeDB, TypedRealTimeDB } from './src/realtime-db';

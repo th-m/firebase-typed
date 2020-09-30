@@ -22,8 +22,8 @@ async function getValue<T = any>(path: string): Promise<T> {
     return (await snapshot).val()
 }
 
-export function typedRealTimeDB<T>(path: string[] = []): TypedPathWrapper<T> {
-    return <TypedPathWrapper<T>>new Proxy({}, {
+export function typedRealTimeDB<T>(path: string[] = []): TypedRealTimeDB<T> {
+    return <TypedRealTimeDB<T>>new Proxy({}, {
         get(target: T, name: TypedPathKey) {
             if (name === '$path') {
                 return pathToString(path).split('.').join('/')
@@ -65,17 +65,17 @@ type TypedPathNode<T> = {
     $value: Promise<T>;
 };
 
-type TypedPathWrapper<T> = (T extends Array<infer Z>
+export type TypedRealTimeDB<T> = (T extends Array<infer Z>
     ? {
-        [index: number]: TypedPathWrapper<Z>;
+        [index: number]: TypedRealTimeDB<Z>;
     }
     : T extends TypedPathFunction<infer RET>
     ? {
-        (): TypedPathWrapper<RET>;
+        (): TypedRealTimeDB<RET>;
     } & {
-        [P in keyof RET]: TypedPathWrapper<RET[P]>;
+        [P in keyof RET]: TypedRealTimeDB<RET[P]>;
     }
     : {
-        [P in keyof T]: TypedPathWrapper<T[P]>;
+        [P in keyof T]: TypedRealTimeDB<T[P]>;
     }
 ) & TypedPathNode<T>;
