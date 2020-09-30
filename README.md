@@ -4,9 +4,15 @@ Typescript utility for firebase. Provides intellisense and type safety for realt
 
 ## Usage
 
-All you need to create a typed instance of your db is an defined interface. For the purposes of this document our example interface will be:
+
+
+All you need to create a typed instance of your db is an defined interface.
 
 ```
+### Import
+
+import { typedRealTimeDB, TypedRealTimeDB } from 'firebase-typed';
+
 export interface Game {
     host: Player,
     characters: Character,
@@ -16,11 +22,6 @@ export interface Game {
     ...
 }
 
-```
-### Import
-```
-import { typedRealTimeDB, TypedRealTimeDB } from 'firebase-typed';
-
 const db = typedRealTimeDB<Game>()
 ```
 
@@ -29,17 +30,17 @@ const db = typedRealTimeDB<Game>()
 For reference the interface demoed looks like this 
 
 
-![Typed Firebase Doc](https://github.com/th-m/firebase-typed/blob/master/assets/typed_doc.gif)
+![Typed Firebase Doc](https://storage.googleapis.com/firebase-typed-gifs/typed_doc.gif)
 
-![Tab-able](https://github.com/th-m/firebase-typed/blob/master/assets/tabable_path.gif)
+![Tab-able](https://storage.googleapis.com/firebase-typed-gifs/tabable_path.gif)
 
 ## `$` methods
 
 This utility provides helper methods to automatically turn db references into queries or listeners. These are denoted by the `$`.  Also the are fully typed by inference. So your handler functions will be checked automagically. 
 
-![type inference](https://github.com/th-m/firebase-typed/blob/master/assets/error_path.png)
+![type inference](https://storage.googleapis.com/firebase-typed-gifs/error_path.png)
 
-![type inference](https://github.com/th-m/firebase-typed/blob/master/assets/happy_path.png)
+![type inference](https://storage.googleapis.com/firebase-typed-gifs/happy_path.png)
 
 
 ## Package exports
