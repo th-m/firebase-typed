@@ -2,6 +2,7 @@
 Typescript utility for firebase. Provides intellisense and type safety for realtime db and firestore methods and documents.
 
 
+## Usage
 
 All you need to create a typed instance of your db is an defined interface. For the purposes of this document our example interface will be:
 
@@ -16,9 +17,7 @@ export interface Game {
 }
 
 ```
-
-## Usage
-
+### Import
 ```
 import { typedRealTimeDB, TypedRealTimeDB } from 'firebase-typed';
 
@@ -41,6 +40,13 @@ this utility provides helper methods to automatically turn db references into qu
 ![type inference](https://github.com/th-m/firebase-typed/blob/master/assets/error_path.png)
 
 ![type inference](https://github.com/th-m/firebase-typed/blob/master/assets/happy_path.png)
+
+
+## Package exports
+- typedAdminDB
+- TypedAdminDB 
+- typedRealTimeDB 
+- TypedRealTimeDB
 
 
 ## TODO
