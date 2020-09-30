@@ -35,7 +35,7 @@ For reference the interface demoed looks like this
 
 ## `$` methods
 
-this utility provides helper methods to automatically turn db references into queries or listeners. These are denoted by the `$`.  Also the are fully typed by inference. So your handler functions will be checked automagically. 
+This utility provides helper methods to automatically turn db references into queries or listeners. These are denoted by the `$`.  Also the are fully typed by inference. So your handler functions will be checked automagically. 
 
 ![type inference](https://github.com/th-m/firebase-typed/blob/master/assets/error_path.png)
 
