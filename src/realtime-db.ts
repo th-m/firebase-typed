@@ -10,7 +10,7 @@ interface Listener {
 function listen<T = any>(path: string, cb: (d: T) => void): Listener {
     const ref = firebase.database().ref(path);
     if (cb) {
-        ref.on("value", (snapshot) => cb(snapshot.val()))
+        ref.on("value", (snapshot: any) => cb(snapshot.val()))
     }
     return {
         off: () => ref.off('value'),
@@ -18,7 +18,7 @@ function listen<T = any>(path: string, cb: (d: T) => void): Listener {
 }
 
 async function getValue<T = any>(path: string): Promise<T> {
-    const snapshot = firebase.database().ref(path).once('value', snap => snap)
+    const snapshot = firebase.database().ref(path).once('value', (snap: any) => snap)
     return (await snapshot).val()
 }
 

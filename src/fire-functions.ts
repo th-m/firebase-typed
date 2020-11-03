@@ -16,8 +16,8 @@ const too = <T = any[]>(promises: Promise<T>[]) => {
     });
 };
 
-async function getValue<T = any>(path: string) {
-    const ref = admin.database().ref(path).once('value', snap => snap);
+export async function getValue<T = any>(path: string) {
+    const ref = admin.database().ref(path).once('value', (snap: any) => snap);
     const [err, data] = await to(ref)
     if (err) {
         console.error({ path, err, data })
@@ -27,8 +27,8 @@ async function getValue<T = any>(path: string) {
     return d
 }
 
-async function getValues<T = any[]>(paths: string[]) {
-    const refs = paths.map(path => admin.database().ref(path).once('value', snap => snap))
+export async function getValues<T = any[]>(paths: string[]) {
+    const refs = paths.map(path => admin.database().ref(path).once('value', (snap: any) => snap))
     const [err, data] = await too(refs)
     if (err) {
         console.error({ paths, err, data })
@@ -39,7 +39,6 @@ async function getValues<T = any[]>(paths: string[]) {
 }
 
 async function setValue<T = any>(path: string, data: T) {
-    // return admin.database().ref(path).set(data).then(() => console.log(`\n\n set: ${Object.keys(data)?.[0] ?? data}  \n path: ${path} `))
     return admin.database().ref(path).set(data).then()
 }
 
